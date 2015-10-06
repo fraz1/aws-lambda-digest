@@ -1,0 +1,33 @@
+{
+  "name": "aws-lambda-digest",
+  "version": "1.0.0",
+  "description": "lamda daily digest",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-fraz1:fraz1/aws-lambda-digest.git"
+  },
+  "author": "Frazer Horn",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.0.0",
+    "pg": "^4.4.2",
+    "postmark": "^1.2.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.2.6",
+    "del": "^1.1.0",
+    "gulp": "^3.8.11",
+    "gulp-install": "^0.2.0",
+    "gulp-util": "latest",
+    "gulp-rename": "^1.2.0",
+    "gulp-zip": "^3.0.2",
+    "mocha": "^2.3.3",
+    "run-sequence": "^1.1.0",
+    "stream": "0.0.2",
+    "yargs": "3.10.0"
+  }
+}
