@@ -45,14 +45,14 @@ exports.handler = function(event, context) {
         }
         data.jobs = result.rows[0].tot;
         db.end();
-        callback(data, completedCallback);
+        callback(data);
       });
 
 
     });
   }
 
-  function deliverCallback(data, callback){
+  function deliverCallback(data){
     console.log('sending to Postmark...');
     var postmark = require("postmark");
     var client = new postmark.Client(config.POSTMARK_SERVER_KEY);
@@ -62,17 +62,16 @@ exports.handler = function(event, context) {
       "To": "team@hellohired.com",
       "TemplateId": config.POSTMARK_TEMPLATE_ID,
       "TemplateModel": data
-    }, function(error, success) {
-        if(error) {
-            console.error("Unable to send via postmark: " + error.message);
-            return context.fail("Unable to send via postmark: " + error.message);
-        }
-        console.log("Sent to postmark for delivery");
-    });
-    callback();
+    }, postmarkResponse);
   }
 
-  function completedCallback(){
-    context.succeed();
+  function postmarkResponse(error, success){
+    console.log('no callback??');
+    if(error) {
+        console.log("Unable to send via postmark: " + error.message);
+        return context.fail("Unable to send via postmark: " + error.message);
+    }
+    console.log("Sent to postmark for delivery");
+    context.succeed('Done!!');
   }
 };
