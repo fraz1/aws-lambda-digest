@@ -1,10 +1,12 @@
 var aws = require('aws-sdk');
 var pg = require('pg');
 
-var env = require('./env.json');
+var envConfig = require('./env.json');
 
 exports.handler = function(event, context) {
-  var config = env[event.env];
+  console.log(event);
+  var env = 'production';
+  var config = envConfig[env];
   run(deliverCallback);
 
   function run(callback) {
@@ -48,7 +50,6 @@ exports.handler = function(event, context) {
         callback(data);
       });
 
-
     });
   }
 
@@ -66,7 +67,6 @@ exports.handler = function(event, context) {
   }
 
   function postmarkResponse(error, success){
-    console.log('no callback??');
     if(error) {
         console.log("Unable to send via postmark: " + error.message);
         return context.fail("Unable to send via postmark: " + error.message);
